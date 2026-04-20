@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto EDO - Interfaz Profesional</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <header class="contenedor-rojo">
+        <div class="franja-roja">
+            <h1 data-i18n="tituloPrincipal">ECUACIONES DIFERENCIALES</h1>
+        </div>
+    </header>
+
+    <div class="franja-gris-separadora"></div>
+
+    <nav class="barra-navegacion">
+        <div class="controles-ajustes">
+            <div class="dropdown">
+                <button class="btn-control" id="btn-ajustes-principal" data-i18n="btnAjustes">⚙️ Ajustes y más...</button>
+                <div class="dropdown-content" id="menu-ajustes">
+                    <button type="button" class="btn-menu-item">🛠️ Configuración</button>
+                    <button type="button" class="btn-menu-item" id="btn-abrir-creditos">ℹ️ Créditos</button>
+                </div>
+            </div>
+            
+            <button class="btn-control btn-cambio" id="btn-alternar" data-i18n="btnCambio">🔄 Cambio</button>
+        </div>
+
+        <div class="botones-modulos">
+            <div id="vista-metodos" class="grupo-botones active">
+                <button class="nav-btn active" onclick="cambiarModulo('Euler')">Euler</button>
+                <button class="nav-btn" onclick="cambiarModulo('Heun')">Heun</button>
+                <button class="nav-btn" onclick="cambiarModulo('RK4')">RK4</button>
+            </div>
+            <div id="vista-modelos" class="grupo-botones">
+                <button class="nav-btn" onclick="cambiarModulo('Satelite')">Satélite</button>
+                <button class="nav-btn" onclick="cambiarModulo('Virus')">Virus</button>
+                <button class="nav-btn" onclick="cambiarModulo('Circuito')">Circuito</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="layout-principal">
+        
+        <aside class="panel-entrada">
+            <h3 data-i18n="tituloEntrada">Entrada</h3>
+            
+            <div class="input-contenedor">
+                <input type="text" id="input-principal" placeholder="Escribe tu EDO aquí..." data-i18n="placeholderEdo" autofocus>
+            </div>
+
+            <div id="parametros-edo" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 15px;">
+                <span style="font-size: 0.9rem; font-weight: bold; color: #555; margin-bottom: 2px;" data-i18n="tituloParametros">Parámetros del Método:</span>
+                
+                <div class="input-contenedor" style="margin-bottom: 0; padding: 8px 12px;">
+                    <input type="text" id="param-x0" placeholder="x inicial (x0)" style="border: none; outline: none; width: 100%; font-family: monospace; font-size: 0.95rem;">
+                </div>
+                
+                <div class="input-contenedor" style="margin-bottom: 0; padding: 8px 12px;">
+                    <input type="text" id="param-xf" placeholder="x final (xf)" style="border: none; outline: none; width: 100%; font-family: monospace; font-size: 0.95rem;">
+                </div>
+                
+                <div class="input-contenedor" style="margin-bottom: 0; padding: 8px 12px;">
+                    <input type="text" id="param-y0" placeholder="y inicial (y0)" style="border: none; outline: none; width: 100%; font-family: monospace; font-size: 0.95rem;">
+                </div>
+                
+                <div class="input-contenedor" style="margin-bottom: 0; padding: 8px 12px;">
+                    <input type="text" id="param-h" placeholder="Tamaño de paso (h)" style="border: none; outline: none; width: 100%; font-family: monospace; font-size: 0.95rem;">
+                </div>
+            </div>
+
+            <div class="contenedor-teclados">
+                
+                <div class="teclado-matematico">
+                    <div class="teclado-tabs">
+                        <button class="tab-btn-circular active">X</button>
+                        <span class="tab-titulo">Básico / Avanzado</span>
+                    </div>
+                    <div class="teclado-grid">
+                        <button onclick="insertar('x')"><i>x</i></button>
+                        <button onclick="insertar('y')"><i>y</i></button>
+                        <button onclick="insertar('π')">π</button>
+                        <button onclick="insertar('e')"><i>e</i></button>
+                        <button onclick="insertar('^2')">□²</button>
+                        <button onclick="insertar('^')">□ⁿ</button>
+                        <button onclick="insertar('sqrt(')">√□</button>
+                        <button onclick="insertar('|')">|□|</button>
+                        <button onclick="insertar('<')">&lt;</button>
+                        <button onclick="insertar('>')">&gt;</button>
+                        <button onclick="insertar('‾')">□̅</button>
+                        <button onclick="insertar('/')">□/□</button>
+                        <button onclick="insertar('ans')">ans</button>
+                        <button onclick="insertar(',')">,</button>
+                        <button onclick="insertar('(')">(</button>
+                        <button onclick="insertar(')')">)</button>
+                    </div>
+                </div>
+
+                <div class="teclado-matematico">
+                    <div class="teclado-tabs">
+                        <button class="tab-btn-circular active">f(x)</button>
+                        <span class="tab-titulo">Funciones Especiales</span>
+                    </div>
+                    <div class="teclado-grid" style="grid-template-columns: repeat(3, 1fr);">
+                        <button onclick="insertar('sen(')">sen</button>
+                        <button onclick="insertar('cos(')">cos</button>
+                        <button onclick="insertar('tg(')">tg</button>
+
+                        <button onclick="insertar('sen⁻¹(')">sen⁻¹</button>
+                        <button onclick="insertar('cos⁻¹(')">cos⁻¹</button>
+                        <button onclick="insertar('tg⁻¹(')">tg⁻¹</button>
+
+                        <button onclick="insertar('ln(')">ln</button>
+                        <button onclick="insertar('log10(')">log₁₀</button>
+                        <button onclick="insertar('log(')">log□</button>
+
+                        <button onclick="insertar('e^')">e^□</button>
+                        <button onclick="insertar('10^')">10^□</button>
+                        <button onclick="insertar('root(')">ⁿ√□</button>
+                    </div>
+                </div>
+
+                <div class="teclado-matematico">
+                    <div class="teclado-tabs">
+                        <button class="tab-btn-circular active">ABC</button>
+                        <span class="tab-titulo">Variables y Parámetros</span>
+                    </div>
+                    <div class="teclado-grid">
+                        <button onclick="insertar('t')"><i>t</i></button>
+                        <button onclick="insertar('k')"><i>k</i></button>
+                        <button onclick="insertar('a')"><i>a</i></button>
+                        <button onclick="insertar('b')"><i>b</i></button>
+
+                        <button onclick="insertar('α')">α</button>
+                        <button onclick="insertar('β')">β</button>
+                        <button onclick="insertar('γ')">γ</button>
+                        <button onclick="insertar('θ')">θ</button>
+
+                        <button onclick="insertar('R')"><i>R</i></button>
+                        <button onclick="insertar('L')"><i>L</i></button>
+                        <button onclick="insertar('C')"><i>C</i></button>
+                        <button onclick="insertar('V')"><i>V</i></button>
+
+                        <button onclick="insertar('I')"><i>I</i></button>
+                        <button onclick="insertar('m')"><i>m</i></button>
+                        <button onclick="insertar('v')"><i>v</i></button>
+                        <button onclick="insertar('G')"><i>G</i></button>
+                    </div>
+                </div>
+
+            </div> 
+            
+            <div style="position: relative; margin-top: 15px;">
+                <button class="btn-resolver-principal" id="btn-resolver-general" style="width: 100%; margin-top: 0;" data-i18n="btnResolver">RESOLVER</button>
+
+                <div class="cuadro-opciones-flotante" id="cuadro-opciones-metodo">
+                    <h4 style="margin-bottom: 12px; color: #333; font-size: 1rem; border-bottom: 1px solid #eee; padding-bottom: 5px;">Variantes: <span id="nombre-metodo-flotante">Euler</span></h4>
+                    <div class="opciones-botones" style="display: flex; flex-direction: column; gap: 8px;">
+                        <button class="btn-opcion" id="btn-ejecutar-manual">▶ Algoritmo Manual</button>
+                        <button class="btn-opcion" id="btn-ejecutar-predef">▶ Clases Predefinidas (Scipy)</button>
+                        <button class="btn-opcion" id="btn-ejecutar-comp" style="background-color: #333; color: white;">⇄ Comparar Resultados</button>
+                    </div>
+                </div>
+            </div>
+
+        </aside>
+
+        <section class="panel-visualizacion">
+            <h2 id="titulo-modulo">Módulo: Euler</h2>
+
+            <div class="cajon-grafica" id="cajon-grafica">
+                <button class="btn-toggle-cajon" id="btn-toggle-cajon">
+                    <span>📊 GRÁFICA</span>
+                </button>
+                <div class="contenido-cajon">
+                    <h3 style="margin-bottom: 15px; color: #333; border-bottom: 2px solid #FF0000; padding-bottom: 5px;">Curvas de Solución</h3>
+                    <div style="position: relative; flex: 1; width: 100%; min-height: 300px;">
+                        <canvas id="grafica-edo"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="consola-blanca-gris" id="consola">
+                <p id="texto-consola">// Los resultados y fórmulas aparecerán en este panel...</p>
+            </div>
+
+            <div class="overlay-acerca" id="pantalla-acerca">
+                <div class="tarjeta-creditos">
+                    <button class="btn-cerrar-acerca" id="btn-cerrar-acerca">&times;</button>
+                    
+                    <div class="cabecera-creditos">
+                        <h2>SISTEMA INTERACTIVO DE E.D.O.</h2>
+                        <p class="institucion-texto">Universidad Tecnológica de Tabasco (UTTAB)</p>
+                    </div>
+
+                    <div class="contenido-acerca">
+                        <div class="fila-informacion">
+                            <div class="columna-info">
+                                <h3>👨‍🏫 Catedrático</h3>
+                                <p class="destacado">Juan Gabriel Vargas Franco</p>
+                            </div>
+                            <div class="columna-info">
+                                <h3>💻 Equipo de Desarrollo</h3>
+                                <p class="destacado">Joshua Emmanuel Vázquez Mayo <br> Kevin <br> Emiliano <br> Bruno<br> Rodolfo <br> Oliver </p>
+                            </div>
+                        </div>
+
+                        <div class="seccion-info">
+                            <h3>🚀 Arquitectura de la Aplicación</h3>
+                            <p>Esta plataforma funciona como un entorno de cálculo dividido en dos áreas principales. El <b>Panel Izquierdo</b> actúa como el centro de control, equipado con teclados dinámicos que inyectan variables y funciones en la consola de entrada. El <b>Panel Derecho</b> funciona como el motor de renderizado y visualización, donde las peticiones son procesadas en tiempo real para mostrar los resultados matemáticos paso a paso.</p>
+                        </div>
+
+                        <div class="seccion-info">
+                            <h3>🧩 Módulos de Operación</h3>
+                            <ul class="lista-modulos">
+                                <li><span>Euler:</span> Resolución de EDOs mediante aproximación de primer orden trazando pendientes lineales.</li>
+                                <li><span>Heun:</span> Método predictor-corrector que refina el cálculo de Euler promediando derivadas.</li>
+                                <li><span>RK4:</span> Estándar Runge-Kutta de 4to orden para máxima precisión en intervalos pequeños.</li>
+                                <li><span>Satélite:</span> Simulación de física orbital aplicando ecuaciones gravitacionales.</li>
+                                <li><span>Virus:</span> Modelo epidemiológico predictivo basado en curvas de infección.</li>
+                                <li><span>Circuito:</span> Análisis de la respuesta en el tiempo para sistemas RLC.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <div class="panel-configuracion" id="panel-configuracion">
+        <div class="config-header">
+            <h4 data-i18n="tituloAjustes">Ajustes de Interfaz</h4>
+            <button id="btn-cerrar-config">&times;</button>
+        </div>
+        
+        <div class="config-body">
+            <div class="config-item">
+                <span class="config-label">Tamaño de Letra</span>
+                <div class="control-vertical">
+                    <button id="btn-letra-mas">+</button>
+                    <span id="valor-letra">100%</span>
+                    <button id="btn-letra-menos">-</button>
+                </div>
+            </div>
+
+            <div class="config-item">
+                <span class="config-label">Idioma</span>
+                <select id="select-idioma" class="config-select">
+                    <option value="es" selected>Español</option>
+                    <option value="en">English</option>
+                    <option value="pt">Português</option>
+                </select>
+            </div>
+
+            <div class="config-item">
+                <span class="config-label">Tema Visual</span>
+                <div class="botones-tema">
+                    <button class="btn-tema activo" data-tema="default" style="background: #FF0000;" title="Rojo UTTAB"></button>
+                    <button class="btn-tema" data-tema="compañero" style="background: #151820; border: 2px solid #5b8fff;" title="Modo Nocturno"></button>
+                    <button class="btn-tema" data-tema="oceano" style="background: #F0F4F8; border: 2px solid #0078D4;" title="Modo Océano"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

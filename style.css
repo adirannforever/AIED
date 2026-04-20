@@ -1,0 +1,606 @@
+/* =========================================
+   ESTILOS BASE
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #FFFFFF;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden; 
+}
+
+/* ENCABEZADO */
+.contenedor-rojo {
+    padding: 5px 10px 0 10px;
+    flex-shrink: 0;
+}
+
+.franja-roja {
+    background-color: #FF0000;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.franja-roja h1 {
+    font-size: 1.4rem;
+}
+
+.franja-gris-separadora {
+    height: 8px;
+    background-color: #D1D1D1;
+    margin: 4px 0;
+    flex-shrink: 0;
+}
+
+/* NAVEGACIÓN SUPERIOR (50/50) */
+.barra-navegacion {
+    display: flex;
+    background-color: #F8F9FA;
+    border-bottom: 2px solid #D1D1D1;
+    height: 55px; 
+    flex-shrink: 0;
+}
+
+.controles-ajustes {
+    width: 350px;
+    display: flex;
+    padding: 8px 15px;
+    gap: 10px;
+    border-right: 2px solid #D1D1D1;
+    align-items: center;
+}
+
+.dropdown {
+    flex: 1; /* Ocupa la mitad exacta */
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.btn-control {
+    width: 100%;
+    height: 38px;
+    background-color: white;
+    border: 1px solid #D1D1D1;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-cambio {
+    flex: 1; /* Ocupa la otra mitad exacta */
+    height: 38px;
+}
+
+.btn-control:hover { background-color: #f0f0f0; }
+.btn-cambio:hover { background-color: #FF0000; color: white; border-color: #FF0000; }
+
+/* MENÚ DROPDOWN */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+    z-index: 1000;
+    border: 1px solid #D1D1D1;
+    border-radius: 4px;
+}
+
+.dropdown-content.show { display: block; }
+
+.btn-menu-item {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-menu-item:hover { background: #f4f4f4; color: #FF0000; }
+
+/* BOTONES DE MÓDULOS */
+.botones-modulos { flex: 1; display: flex; }
+.grupo-botones { display: none; width: 100%; }
+.grupo-botones.active { display: flex; }
+
+.nav-btn {
+    flex: 1;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-weight: 600;
+    border-right: 1px solid #D1D1D1;
+}
+
+.nav-btn.active { background-color: #FF0000; color: white; }
+
+/* =========================================
+   PANEL IZQUIERDO Y TECLADOS
+   ========================================= */
+.layout-principal {
+    display: flex;
+    flex: 1;
+    min-height: 0; /* Vital para scroll interno */
+}
+
+.panel-entrada {
+    width: 350px;
+    background-color: #F8F9FA;
+    border-right: 2px solid #D1D1D1;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.input-contenedor {
+    background: white;
+    border: 2px solid #D1D1D1;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+}
+
+#input-principal {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 1.1rem;
+    font-family: monospace;
+}
+
+.contenedor-teclados {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.contenedor-teclados::-webkit-scrollbar { width: 6px; }
+.contenedor-teclados::-webkit-scrollbar-thumb { background-color: #D1D1D1; border-radius: 4px; }
+
+.teclado-matematico {
+    background: #E9ECEF;
+    border-radius: 10px;
+    padding: 15px;
+    border: 1px solid #D1D1D1;
+    margin-bottom: 20px;
+    flex-shrink: 0; 
+}
+
+.teclado-tabs { display: flex; align-items: center; margin-bottom: 12px; }
+
+.tab-btn-circular {
+    background: #9FA8DA;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-weight: bold;
+}
+
+.tab-titulo { font-size: 0.85rem; margin-left: 10px; font-weight: 600; color: #555; }
+
+.teclado-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.teclado-grid button {
+    background: white;
+    border: 1px solid #D1D1D1;
+    border-radius: 6px;
+    padding: 12px 5px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.teclado-grid button:hover { background: #f8f8f8; }
+
+.btn-borrar {
+    background-color: #ffeaea !important;
+    color: #cc0000;
+    border-color: #ffcccc !important;
+}
+
+.btn-borrar:hover { background-color: #ffcccc !important; }
+
+.btn-resolver-principal {
+    background-color: #6C757D;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.btn-resolver-principal:hover { background-color: #FF0000; }
+
+/* =========================================
+   NUEVO: CUADRO DE OPCIONES FLOTANTE (Sub-menú)
+   ========================================= */
+.cuadro-opciones-flotante {
+    position: absolute;
+    bottom: 0;
+    left: 105%; 
+    width: 250px;
+    background-color: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-left: 5px solid #FF0000;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    z-index: 3000; 
+    display: none; 
+    flex-direction: column;
+    animation: deslizarDerecha 0.2s ease-out;
+}
+
+@keyframes deslizarDerecha {
+    from { opacity: 0; transform: translateX(-15px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.cuadro-opciones-flotante.mostrar {
+    display: flex;
+}
+
+.btn-opcion {
+    background-color: #F8F9FA;
+    border: 1px solid #D1D1D1;
+    color: #333;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+    font-size: 0.85rem;
+}
+
+.btn-opcion:hover {
+    background-color: #FF0000;
+    color: white;
+    border-color: #FF0000;
+    transform: translateX(4px); 
+}
+
+/* =========================================
+   PANEL DERECHO
+   ========================================= */
+.panel-visualizacion {
+    flex: 1;
+    padding: 25px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Necesario para que el cajón no rompa la pantalla */
+}
+
+.consola-blanca-gris {
+    flex: 1;
+    background-color: #F4F4F4;
+    border: 1px solid #D1D1D1;
+    border-radius: 8px;
+    padding: 20px;
+    font-family: monospace;
+    overflow-y: auto;
+}
+
+/* =========================================
+   NUEVO: CAJÓN CORREDIZO PARA LA GRÁFICA
+   ========================================= */
+.cajon-grafica {
+    position: absolute;
+    top: 15%; /* A la altura de la mitad superior */
+    right: 0;
+    width: 550px; /* Ancho del cajón */
+    height: 70%;  /* Altura del cajón */
+    background-color: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-right: none;
+    border-radius: 12px 0 0 12px;
+    box-shadow: -5px 5px 25px rgba(0,0,0,0.15);
+    z-index: 2500; /* Sobre la consola, debajo del overlay de créditos */
+    display: flex;
+    flex-direction: column;
+    /* La magia: lo empujamos fuera de la pantalla el 100% de su ancho */
+    transform: translateX(100%); 
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Clase que le agregaremos con JS para que salga */
+.cajon-grafica.abierto {
+    transform: translateX(0); 
+}
+
+/* El botón vertical que sobresale */
+.btn-toggle-cajon {
+    position: absolute;
+    left: -40px; /* Lo sacamos hacia la izquierda del cajón */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 120px;
+    background-color: #FF0000; /* Tu color insignia */
+    color: white;
+    border: none;
+    border-radius: 8px 0 0 8px;
+    cursor: pointer;
+    box-shadow: -3px 0px 8px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.btn-toggle-cajon:hover {
+    background-color: #cc0000;
+}
+
+/* Texto girado para la pestaña */
+.btn-toggle-cajon span {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    letter-spacing: 2px;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.contenido-cajon {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+
+/* =========================================
+   OVERLAY Y TARJETA DE CRÉDITOS
+   ========================================= */
+.overlay-acerca {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(244, 244, 244, 0.85); 
+    backdrop-filter: blur(3px); 
+    z-index: 4000;
+    display: none;
+    align-items: center; 
+    justify-content: center; 
+    padding: 20px;
+}
+
+.overlay-acerca.mostrar { display: flex; }
+
+.tarjeta-creditos {
+    background-color: #FFFFFF;
+    width: 100%;
+    max-width: 750px; 
+    max-height: 95%;
+    border-radius: 12px;
+    box-shadow: 0px 15px 35px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    border-top: 6px solid #FF0000; 
+    animation: deslizarArriba 0.4s ease-out;
+}
+
+@keyframes deslizarArriba {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.btn-cerrar-acerca {
+    position: absolute;
+    top: 15px; right: 20px; font-size: 2rem; background: none; border: none; color: #999; cursor: pointer; transition: color 0.2s, transform 0.2s; z-index: 10;
+}
+
+.btn-cerrar-acerca:hover { color: #FF0000; transform: scale(1.1); }
+
+.cabecera-creditos { text-align: center; padding: 30px 20px 20px 20px; border-bottom: 1px solid #EEEEEE; background-color: #FAFAFA; }
+.cabecera-creditos h2 { font-size: 1.8rem; color: #333; margin-bottom: 5px; letter-spacing: 1px; }
+.institucion-texto { color: #FF0000; font-weight: 600; font-size: 0.95rem; text-transform: uppercase; }
+
+.contenido-acerca { padding: 30px 40px; overflow-y: auto; }
+.fila-informacion { display: flex; gap: 30px; margin-bottom: 30px; }
+.columna-info { flex: 1; background-color: #FFF5F5; padding: 20px; border-radius: 8px; border-left: 4px solid #FF0000; }
+.columna-info h3 { font-size: 1rem; color: #555; margin-bottom: 8px; }
+.columna-info .destacado { font-size: 1.1rem; font-weight: bold; color: #FF0000; line-height: 1.5; }
+
+.seccion-info { margin-bottom: 25px; }
+.seccion-info h3 { color: #333; font-size: 1.2rem; margin-bottom: 12px; display: flex; align-items: center; }
+.seccion-info p { line-height: 1.7; color: #555; text-align: justify; }
+
+.lista-modulos { list-style: none; }
+.lista-modulos li { margin-bottom: 12px; padding-left: 20px; position: relative; line-height: 1.6; color: #555; }
+.lista-modulos li::before { content: "■"; color: #FF0000; position: absolute; left: 0; font-size: 0.8rem; top: 3px; }
+.lista-modulos li span { font-weight: bold; color: #333; }
+
+/* =========================================
+   PANEL DE CONFIGURACIÓN (INFERIOR DERECHA)
+   ========================================= */
+.panel-configuracion {
+    position: fixed;
+    bottom: -450px; /* Oculto inicialmente */
+    right: 25px;
+    width: 300px;
+    background-color: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.15);
+    z-index: 5000;
+    display: flex;
+    flex-direction: column;
+    transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.panel-configuracion.mostrar {
+    bottom: 0; 
+}
+
+.config-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #F8F9FA;
+    border-bottom: 1px solid #D1D1D1;
+    border-radius: 12px 12px 0 0;
+}
+
+.config-header h4 { font-size: 1rem; color: #333; }
+
+#btn-cerrar-config { 
+    background: none; 
+    border: none; 
+    font-size: 1.8rem; 
+    color: #BBB; 
+    cursor: pointer; 
+    line-height: 1;
+}
+#btn-cerrar-config:hover { color: #FF0000; }
+
+.config-body { padding: 20px; display: flex; flex-direction: column; gap: 20px; }
+
+.config-item { display: flex; justify-content: space-between; align-items: center; }
+.config-label { font-weight: 600; font-size: 0.9rem; color: #444; }
+
+/* Control de Letra */
+.control-vertical { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    background: #FFF; 
+    border-radius: 8px; 
+    border: 1px solid #CCC; 
+    width: 50px; 
+    overflow: hidden; 
+}
+.control-vertical button { 
+    background: #F4F4F4; 
+    border: none; 
+    width: 100%; 
+    height: 30px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    font-size: 1.2rem; 
+    transition: background 0.2s; 
+}
+.control-vertical button:hover { background: #E0E0E0; }
+#valor-letra { 
+    font-size: 0.8rem; 
+    font-weight: bold; 
+    padding: 5px 0; 
+    border-top: 1px solid #CCC; 
+    border-bottom: 1px solid #CCC; 
+    width: 100%; 
+    text-align: center; 
+}
+
+/* Selector de Idioma */
+.config-select { 
+    padding: 6px 10px; 
+    border-radius: 6px; 
+    border: 1px solid #CCC; 
+    outline: none; 
+    font-size: 0.9rem;
+}
+
+/* Botones de Temas */
+.botones-tema { display: flex; gap: 12px; }
+.btn-tema { 
+    width: 32px; 
+    height: 32px; 
+    border-radius: 50%; 
+    border: 3px solid white; 
+    cursor: pointer; 
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16); 
+    transition: transform 0.2s, border-color 0.2s; 
+}
+.btn-tema:hover { transform: scale(1.15); }
+.btn-tema.activo { border-color: #333; transform: scale(1.15); }
+
+/* =========================================
+   ESTILOS PARA TEMAS (MODO NOCHE Y OCÉANO 2.0)
+   ========================================= */
+
+/* TEMA COMPAÑERO (Modo Noche) */
+body.tema-compañero { background-color: #0d0f14; color: #e8ecf5; }
+body.tema-compañero .panel-entrada, body.tema-compañero .barra-navegacion { background-color: #151820; border-color: #2a3048; }
+body.tema-compañero .consola-blanca-gris, body.tema-compañero .input-contenedor, body.tema-compañero .teclado-matematico { background-color: #1c2030; border-color: #2a3048; color: #e8ecf5; }
+body.tema-compañero .teclado-grid button, body.tema-compañero .btn-control { background: #2a3048; color: #e8ecf5; border-color: #3b4261; }
+body.tema-compañero .franja-roja, body.tema-compañero .btn-resolver-principal:hover, body.tema-compañero .btn-toggle-cajon { background-color: #5b8fff; color: #0d0f14; font-weight: bold; }
+body.tema-compañero .panel-configuracion { background-color: #151820; border-color: #2a3048; }
+body.tema-compañero .config-header { background-color: #1c2030; border-color: #2a3048; }
+body.tema-compañero h2, body.tema-compañero h3, body.tema-compañero h4, body.tema-compañero span { color: #e8ecf5 !important; }
+
+/* FIX: Créditos en Modo Noche */
+body.tema-compañero .tarjeta-creditos { background-color: #151820; border-top-color: #5b8fff; }
+body.tema-compañero .cabecera-creditos { background-color: #1c2030; border-bottom-color: #2a3048; }
+body.tema-compañero .columna-info { background-color: #1c2030; border-left-color: #5b8fff; }
+body.tema-compañero .institucion-texto, body.tema-compañero .columna-info .destacado { color: #5b8fff; }
+body.tema-compañero .seccion-info h3, body.tema-compañero .lista-modulos li span { color: #8cb4ff !important; }
+body.tema-compañero .lista-modulos li::before { color: #5b8fff; }
+body.tema-compañero .overlay-acerca { background-color: rgba(13, 15, 20, 0.9); }
+
+
+/* TEMA OCÉANO 2.0 (Moderno y Profundo) */
+body.tema-oceano { background-color: #e0f2fe; color: #0f172a; } /* Fondo azul cielo muy suave */
+body.tema-oceano .panel-entrada, body.tema-oceano .barra-navegacion { background-color: #ffffff; border-color: #bae6fd; box-shadow: 2px 0 15px rgba(2, 132, 199, 0.05); }
+body.tema-oceano .consola-blanca-gris, body.tema-oceano .input-contenedor, body.tema-oceano .teclado-matematico { background-color: #f0f9ff; border-color: #bae6fd; color: #0f172a; }
+body.tema-oceano .teclado-grid button, body.tema-oceano .btn-control { background: #ffffff; color: #0284c7; border-color: #7dd3fc; }
+body.tema-oceano .teclado-grid button:hover, body.tema-oceano .btn-control:hover { background: #e0f2fe; }
+body.tema-oceano .franja-gris-separadora { background-color: #bae6fd; }
+
+/* Magia del Océano: Un degradado elegante para los colores principales */
+body.tema-oceano .franja-roja, body.tema-oceano .btn-resolver-principal:hover, body.tema-oceano .btn-toggle-cajon { 
+    background: linear-gradient(135deg, #0284c7, #0ea5e9); 
+    color: white; 
+    border: none; 
+}
+body.tema-oceano .nav-btn.active { background-color: #0284c7; color: white; border-color: #0284c7; }
+body.tema-oceano .panel-configuracion, body.tema-oceano .config-header { background-color: #ffffff; border-color: #bae6fd; }
+body.tema-oceano h2, body.tema-oceano h3, body.tema-oceano h4 { color: #0369a1 !important; }
+
+/* FIX: Créditos en Modo Océano */
+body.tema-oceano .tarjeta-creditos { background-color: #ffffff; border-top-color: #0284c7; }
+body.tema-oceano .cabecera-creditos { background-color: #f0f9ff; border-bottom-color: #bae6fd; }
+body.tema-oceano .columna-info { background-color: #f0f9ff; border-left-color: #0ea5e9; }
+body.tema-oceano .institucion-texto, body.tema-oceano .columna-info .destacado { color: #0284c7; }
+body.tema-oceano .seccion-info h3, body.tema-oceano .lista-modulos li span { color: #0369a1 !important; }
+body.tema-oceano .lista-modulos li::before { color: #0ea5e9; }
+body.tema-oceano .overlay-acerca { background-color: rgba(224, 242, 254, 0.85); }
